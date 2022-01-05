@@ -9,7 +9,7 @@ const args = process.argv.slice(2);
 if (fs.existsSync(dbFile)) {
   if (!args.includes("--force")) {
     console.log(
-      "Db file already exists, delete it first or use the --force flag!"
+      "Db file already exists, delete it first or use the -- --force flag!"
     );
     process.exit(1);
   } else {
@@ -24,25 +24,28 @@ db.serialize(() => {
   console.log("Creating tables...");
   db.run("PRAGMA foreign_keys = ON");
 
-  // create posts table
+ 
+
+  // create burger table
   db.run(
-    "CREATE TABLE posts (id INTEGER PRIMARY KEY, title TEXT, imageURL TEXT, body TEXT, isPublished INTEGER, createdAt TEXT)"
+    "CREATE TABLE burger (id INTEGER PRIMARY KEY, nom TEXT, prix INTEGER, description INTEGER, photoURL TEXT)"
   );
 
-  // create comments table
+  // create boisson table
   db.run(
-    "CREATE TABLE comments (id INTEGER PRIMARY KEY, content TEXT, createdAt TEXT, postId INTEGER, FOREIGN KEY(postId) REFERENCES posts(id) ON DELETE CASCADE)"
+    "CREATE TABLE boisson (id INTEGER PRIMARY KEY, nom TEXT, prix INTEGER, description INTEGER, photoURL TEXT)"
+  );
+
+   // create menu table
+  db.run(
+    "CREATE TABLE menu (id INTEGER PRIMARY KEY, nom TEXT, accompagnement TEXT, description TEXT, prix INTEGER, photoURL TEXT, burgerId TEXT, boissonId TEXT)"
   );
 
   if (args.includes("--seed")) {
     console.log("Seeding data into database...");
 
     db.run(
-      'INSERT INTO posts (id, title, body, isPublished, createdAt) VALUES (1, "This is the Title", "This is the body", 0, datetime("now"))'
-    );
-
-    db.run(
-      'INSERT INTO comments (id, content, createdAt, postId) VALUES (1, "This blog post was awesome", datetime("now"), 1)'
+      'INSERT INTO burger (id, nom, prix, description) VALUES (1, "Burger 1", 4, "This is the description")'
     );
   }
 });
