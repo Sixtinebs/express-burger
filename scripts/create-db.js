@@ -9,7 +9,7 @@ const args = process.argv.slice(2);
 if (fs.existsSync(dbFile)) {
   if (!args.includes("--force")) {
     console.log(
-      "Db file already exists, delete it first or use the --force flag!"
+      "Db file already exists, delete it first or use the -- --force flag!"
     );
     process.exit(1);
   } else {
@@ -23,30 +23,30 @@ const db = new sqlite.Database(dbFile);
 db.serialize(() => {
   console.log("Creating tables...");
   db.run("PRAGMA foreign_keys = ON");
-
-  // create menu table
-  db.run(
-    "CREATE TABLE menu (id INTEGER PRIMARY KEY, nom TEXT, accompagnement TEXT, description TEXT, prix INTEGER, photo TEXT, burger TEXT, boisson TEXT)"
-  );
-
+ 
   // create burger table
   db.run(
-    "CREATE TABLE burger (id INTEGER PRIMARY KEY, nom TEXT, description TEXT, prix INTEGER,  photo TEXT )"
+    "CREATE TABLE burger (id INTEGER PRIMARY KEY, nom TEXT, prix INTEGER, description INTEGER, photoURL TEXT)"
   );
+
   // create boisson table
   db.run(
-    "CREATE TABLE boisson (id INTEGER PRIMARY KEY, nom TEXT, description TEXT, prix INTEGER,  photo TEXT )"
+    "CREATE TABLE boisson (id INTEGER PRIMARY KEY, nom TEXT, prix INTEGER, description INTEGER, photoURL TEXT)"
+  );
+
+   // create menu table
+  db.run(
+    "CREATE TABLE menu (id INTEGER PRIMARY KEY, nom TEXT, accompagnement TEXT, description TEXT, prix INTEGER, photoURL TEXT, burgerId TEXT, boissonId TEXT)"
+
   );
 
   if (args.includes("--seed")) {
     console.log("Seeding data into database...");
 
     db.run(
-      'INSERT INTO burger (id, nom, description, prix, photo) VALUES (1, "burger 1", "description du burger 1", 8, "")'
-    );
 
-    db.run(
-      'INSERT INTO boisson (id, nom, description, prix, photo) VALUES (1, "Boisson 1", description du boisson 1, 3, "")'
+      'INSERT INTO burger (id, nom, prix, description) VALUES (1, "Burger 1", 4, "This is the description")'
+
     );
   }
 });
