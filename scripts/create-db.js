@@ -7,15 +7,15 @@ const dbFile = path.resolve(__dirname, "../data/db.sqlite");
 const args = process.argv.slice(2);
 
 if (fs.existsSync(dbFile)) {
-  if (!args.includes("--force")) {
-    console.log(
-      "Db file already exists, delete it first or use the -- --force flag!"
-    );
-    process.exit(1);
-  } else {
+  // if (!args.includes("--force")) {
+  //   console.log(
+  //     "Db file already exists, delete it first or use the -- --force flag!"
+  //   );
+  //   process.exit(1);
+  // } else {
     console.log("DB already exists, Deleting it...");
     fs.rmSync(dbFile);
-  }
+  // }
 }
 
 const db = new sqlite.Database(dbFile);
@@ -39,14 +39,43 @@ db.serialize(() => {
     "CREATE TABLE menu (id INTEGER PRIMARY KEY, nom TEXT, accompagnement TEXT, description TEXT, prix INTEGER, photoURL TEXT, burgerId TEXT, boissonId TEXT)"
 
   );
+  // Insert new burger
+  db.run(
 
-  if (args.includes("--seed")) {
-    console.log("Seeding data into database...");
+    'INSERT INTO burger (nom, prix, description) VALUES ("Burger 1", 4, "This is the description")'
 
-    db.run(
+  );
+  db.run(
 
-      'INSERT INTO burger (id, nom, prix, description) VALUES (1, "Burger 1", 4, "This is the description")'
+    'INSERT INTO burger (nom, prix, description) VALUES ("Burger 2", 4, "This is the description")'
 
-    );
-  }
+  );
+  db.run(
+
+    'INSERT INTO burger (nom, prix, description) VALUES ("Burger 3", 4, "This is the description")'
+
+  );
+  db.run(
+
+    'INSERT INTO boisson (nom, prix, description, photoURL) VALUES ("boisson 1", 3.5, "This is the description", "no photo")'
+
+  );
+  db.run(
+
+    'INSERT INTO boisson (nom, prix, description, photoURL) VALUES ("boisson 2", 3.5, "This is the description", "no photo")'
+
+  );
+
+
+  // if (args.includes("--seed")) {
+  //   console.log("Seeding data into database...");
+
+  //   db.run(
+
+  //     'INSERT INTO burger (id, nom, prix, description) VALUES (1, "Burger 1", 4, "This is the description")'
+
+  //   );
+  // }
 });
+
+module.exports = db;
