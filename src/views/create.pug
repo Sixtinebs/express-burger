@@ -1,0 +1,113 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="style.css")
+        title Create You Burger ()
+    body(id="forms")
+    section(class="form-express" id="form-boisson")
+        h2="Ajouter votre burger"
+        form(action="/create/new-burger" method="post")
+            div
+                p='Nom du burger'
+                input(
+                    type='text'
+                    name='nom'
+                )
+            div
+                p='prix'
+                input(
+                    type='number'
+                    name='prix'
+                )
+            div
+                p="description"
+                input(
+                    type='text'
+                    name='description'
+                )
+            div
+                input(
+                    type='submit'
+                    name='Envoyer'
+                )
+    section(class="form-express" id="form-boisson")
+        h2="Ajouter votre boisson"
+        form(action="/create/new-boisson" method="post" enctype="multipart/form-data")
+            div
+                p='Nom de botre boisson'
+                input(
+                    type='text'
+                    name='nom'
+                )
+            div
+                p='prix'
+                input(
+                    type='number'
+                    name='prix'
+                )
+            div
+                p="description"
+                input(
+                    type='text'
+                    name='description'
+                )
+                p="Une image de votre boisson"
+                input(
+                    type="file"
+                    name='photo'
+                    )
+            div
+                input(
+                    type='submit'
+                    name='Envoyer'
+                )
+    section(class="add-menu")
+        h2="Créer ton menu"
+        form(action="/create/new-menu" method="post" enctype="multipart/form-data")
+            div
+                p='Nom'
+                input(
+                    type='text'
+                    name='nom'  
+                )
+            div(class="select-boisson")
+                h3="Choisi ta boisson"
+                select(name="boisson")
+                    each boisson in boissons
+                        option(value=boisson.id) #{boisson.nom}
+            div(class="select-burger")
+                h3="Choisi ton burger"
+                select(name="burger")
+                    each burger in burgers
+                        option(value=burger.id) #{burger.nom}
+            div(class="select-burger")
+                h3="Choisi ton accompagnement"
+                select(name="accompagnement")
+                    each side in {1: "frites",2: "nuggets"}
+                        option(value=side) #{side}
+            div
+                p='prix'
+                input(
+                    type='number'
+                    name='prix'
+                )
+            div
+                p="description"
+                input(
+                    type='text'
+                    name='description'
+                )
+            div
+                p="Une image à votre menu"
+                input(
+                    type="file"
+                    name='photo'
+                )
+            div
+                input(
+                    type='submit'
+                    name='Envoyer'
+                )
