@@ -3,6 +3,10 @@ const express = require("express");
 const app = express();
 const db = require('../scripts/create-db')
 const createBuger = require('./routes/create');
+const burgerService = require("./services/burgers.service");
+const boissonService = require("./services/boissons.service");
+const menuService = require("./services/menus.service");
+
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.static('css'));
@@ -15,7 +19,11 @@ app.set('view engine', 'pug');
 
 //ROUTES
 app.get('/', (req, res) => {  
-    res.render("index", { title: 'Welcome to Buger Express !!'});
+    const burgers = burgerService.findAll();
+    const menus = menuService.findAll();
+    const boissons = boissonService.findAll();
+    //console.log(burgers);
+    res.render("index", { title: 'Welcome to Buger Express !!', burgers: burgers, menus: menus, boissons:boissons});
 });
 
 //Route pour créer un nouveau burger et un nouvelle boisson
