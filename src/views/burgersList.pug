@@ -1,0 +1,10 @@
+h1="List of burgers"
+each burger in burgers 
+            article
+                header
+                    strong #{burger.nom}
+                    strong #{burger.prix}
+                    small #{burger.description}
+            div= burger.description
+            form(action=`/burger/${burger.id}/delete` method="post")
+            button.inline Delete

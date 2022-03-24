@@ -1,0 +1,8 @@
+h1="List of boissons"
+each boisson in boissons 
+            article
+                header
+                    strong #{boisson.nom}
+                    strong #{boisson.prix}
+                    small  #{boisson.description}
+            div= boisson.description
