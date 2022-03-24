@@ -3,10 +3,11 @@ const express = require("express");
 const app = express();
 const db = require('../scripts/create-db')
 const createBuger = require('./routes/create');
+const update = require('./routes/update');
+
 const burgerService = require("./services/burgers.service");
 const boissonService = require("./services/boissons.service");
 const menuService = require("./services/menus.service");
-
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.static('css'));
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 //Route pour créer un nouveau burger et un nouvelle boisson
 app.use('/create', createBuger)
+app.use('/update', update)
 
 
 module.exports = app;

@@ -65,6 +65,16 @@ db.serialize(() => {
     'INSERT INTO boisson (nom, prix, description, photoURL) VALUES ("boisson 2", 3.5, "This is the description", "no photo")'
 
   );
+  db.run(
+
+    'INSERT INTO menu (nom, accompagnement, description, prix, photoURL, burgerId, boissonId) VALUES ("menu 1", "frites", "This is the description", 8, "no photo", 3, 2)'
+
+  );
+  db.run(
+
+    'INSERT INTO menu (nom, accompagnement, description, prix, photoURL, burgerId, boissonId) VALUES ("menu 2", "frites", "This is the description", 8, "no photo", 1, 2)'
+
+  );
 
 
   // if (args.includes("--seed")) {

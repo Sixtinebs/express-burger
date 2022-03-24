@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        style()
+        title Document
+    body 
+    h1="Modifie le produit"
+    form(method="post" enctype="multipart/form-data" action="/update/update-"+type)
+        each element in elements
+            div
+                input(
+                    type='text'
+                    name='nom'
+                    value=element.nom
+                )
+            div
+                input(
+                    type='number'
+                    name='prix'
+                    value=element.prix
+                )
+            div
+                input(
+                    type='text'
+                    name='description'
+                    value=element.description
+                )
+            if type == "menu"
+                div(class="select-burger")
+                    select(name="accompagnement")
+                        each side in {1: "frites",2: "nuggets"}
+                            option(value=side) #{side}
+                            div(class="select-boisson")
+                div(class="select-boisson")
+                    select(name="boisson")
+                        each boisson in boissons
+                            option(value=boisson.id) #{boisson.nom}
+                div(class="select-burger")
+                    select(name="burger")
+                        each burger in burgers
+                            option(value=burger.id) #{burger.nom}
+            div
+                input(
+                    type="file"
+                    name='photo'
+                )
+            div
+                input(
+                    type="hidden"
+                    name="id"
+                    value=id
+                )
+            div
+                input(
+                    type='submit'
+                    name='Envoyer'
+            )
