@@ -23,8 +23,6 @@ router.get('/', (req, res, next) => {
         //res.render("create", { burgers: rows})
         res.render("create", { burgers: burgers, boissons: boissons} )
     });
-
-   
 });
 
 router.post('/new-burger', (req, res, next) => {

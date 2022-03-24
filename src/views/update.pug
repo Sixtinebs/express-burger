@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        style()
+        title Document
+    body 
+        h1="Express Burger"
+        h2="Liste des burgers"
+        each burger in burgers
+            p=burger.nom
+            a(class='button' href='/update/burger/'+burger.id) Modifier
+        h2="Liste des boissons"
+        each boisson in boissons
+            p=boisson.nom
+            a(class='button' href='/update/boisson/'+boisson.id) Modifier
+        h2="Liste des menus"
+        each menu in menus
+            p=menu.nom
+            a(class='button' href='/update/menu/'+menu.id) Modifier
